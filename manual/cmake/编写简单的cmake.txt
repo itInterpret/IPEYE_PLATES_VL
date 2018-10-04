@@ -1,0 +1,45 @@
+﻿安装过程
+    1. 首先去官网下载安装包,选择“XX.tar.gz”源码安装包 
+
+    2. 输入如下命令
+       $tar -zxvf xx.tar.gz 
+$./bootstrap 
+$make 
+$make install
+输入以上命令后就已经可以在ubuntu上安装好cmake
+编写简单的cmake
+使用cmake首先得有个CMakeList.txt文件，你需要把配置信息写在该文件中，然后通过cmake去处理该文件。 
+将设有下面一个main.cpp文件
+//main.cpp文件
+#include<iostream>
+using namespace std;
+int main(){
+    cout<<"hello world!"<<endl;
+    return 0;
+}1234567
+这时候我们就可以写个如下的CMakeList.txt文件
+#cmake最小需要版本
+cmake_minimum_required(VERSION 2.8)
+
+#项目名字
+project(HELLOWORLD)
+
+#包含原程序,即把给定目录下的源程序复制给变量DIR_SRC
+aux_source_directory(DIR_SRC ./)
+
+#生成程序
+add_executable(helloworld ${DIR_SRC})1234567891011
+然后执行如下命令
+$mkdir build 
+$cd build 
+$cmake .. 
+$make 
+$./helloworld
+这样就编译好程序并运行。
+添加静态库或者动态库
+而假设我们程序用到了在/usr/lib下的一个静态库libmy.a，那就需要添加如下两个命令
+#库所在位置
+link_directories(/usr/lib)
+
+#程序编译时候链接库
+target_link_libraries(helloworld my) 
