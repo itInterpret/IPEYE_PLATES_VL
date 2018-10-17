@@ -44,11 +44,7 @@ def AddSmudginess(img, Smu):
     return img
 
 def rot(img,angle,shape,max_angle):
-    """ 使图像轻微的畸变
-        img 输入图像
-        factor 畸变的参数
-        size 为图片的目标尺寸
-    """
+
     size_o = [shape[1],shape[0]]
     size = (shape[1]+ int(shape[0]*cos((float(max_angle)/180) * 3.14)),shape[0])
 
